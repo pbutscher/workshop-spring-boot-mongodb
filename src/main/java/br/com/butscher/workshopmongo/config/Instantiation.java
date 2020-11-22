@@ -1,7 +1,6 @@
 package br.com.butscher.workshopmongo.config;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.butscher.workshopmongo.domain.Post;
 import br.com.butscher.workshopmongo.domain.User;
+import br.com.butscher.workshopmongo.dto.AuthorDTO;
 import br.com.butscher.workshopmongo.repository.PostRepository;
 import br.com.butscher.workshopmongo.repository.UserRepository;
 
@@ -34,13 +34,13 @@ public class Instantiation implements CommandLineRunner {
 		User maria = new User(null,"maria","maria@gmail.com");
 		User alex = new User(null,"alex","alex@gmail.com");
 		User bob = new User(null,"bob","bob@gmail.com");
-		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", maria);
-		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", maria);
-		
+
 		userRepository.save(maria);
 		userRepository.save(alex);
 		userRepository.save(bob);
+
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
 		
 		postRepository.save(post1);
 		postRepository.save(post2);		
